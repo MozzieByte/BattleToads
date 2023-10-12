@@ -231,6 +231,12 @@ namespace EpicTransport {
 
             for(int i  = 0; i < packets.Length; i++) {
                 if (connectionId == int.MinValue) {
+                    if (client == null)
+                    {
+                        OnClientDisconnected.Invoke();
+                        return;
+                    }
+                    
                     client.Send(packets[i].ToBytes(), channelId);
                 } else {
                     server.SendAll(connectionId, packets[i].ToBytes(), channelId);
@@ -283,8 +289,7 @@ namespace EpicTransport {
 
         public override int GetMaxPacketSize(int channelId) => P2PInterface.MaxPacketSize * maxFragments; 
 
-        //public override int GetMaxBatchSize(int channelId) => P2PInterface.MaxPacketSize; 
-        // Use P2PInterface.MaxPacketSize as everything above will get fragmentated and will be counter effective to batching
+        public override int GetBatchThreshold(int channelId) => P2PInterface.MaxPacketSize; // Use P2PInterface.MaxPacketSize as everything above will get fragmentated and will be counter effective to batching
 
         public override bool Available() {
             try {

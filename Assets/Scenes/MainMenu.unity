@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 281477054}
-  - component: {fileID: 281477053}
+  - component: {fileID: 281477055}
   m_Layer: 0
   m_Name: EpicOnlineServices
   m_TagString: Untagged
@@ -140,32 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &281477053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 281477052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09c2b9adb023e6547aa45a0e8bf5fcfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  apiKeys: {fileID: 11400000, guid: 8f42963f3350a2041a18accfafef210e, type: 2}
-  authInterfaceLogin: 0
-  authInterfaceCredentialType: 6
-  devAuthToolPort: 7878
-  devAuthToolCredentialName: 
-  connectInterfaceCredentialType: 10
-  deviceModel: PC Windows 64bit
-  displayName: User
-  epicLoggerLevel: 200
-  collectPlayerMetrics: 1
-  checkForEpicLauncherAndRestart: 0
-  delayedInitialization: 0
-  platformTickIntervalInSeconds: 0
-  tickBudgetInMilliseconds: 0
 --- !u!4 &281477054
 Transform:
   m_ObjectHideFlags: 0
@@ -181,6 +155,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &281477055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281477052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c2b9adb023e6547aa45a0e8bf5fcfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  apiKeys: {fileID: 11400000, guid: b8d8087ab6a893442b128d27fe04805a, type: 2}
+  authInterfaceLogin: 0
+  authInterfaceCredentialType: 6
+  devAuthToolPort: 7878
+  devAuthToolCredentialName: 
+  connectInterfaceCredentialType: 10
+  deviceModel: PC Windows 64bit
+  displayName: User
+  epicLoggerLevel: 200
+  collectPlayerMetrics: 1
+  checkForEpicLauncherAndRestart: 0
+  delayedInitialization: 0
+  platformTickIntervalInSeconds: 0
+  tickBudgetInMilliseconds: 0
 --- !u!1 &571344485
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 571344486}
   - component: {fileID: 571344488}
-  - component: {fileID: 571344487}
+  - component: {fileID: 571344490}
   - component: {fileID: 571344489}
   m_Layer: 0
   m_Name: NetworkManager
@@ -215,23 +215,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &571344487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571344485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5f2d307354f3ea49b3ea12e6763a9fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Channels: 0200000000000000
-  timeout: 25
-  maxFragments: 55
-  ignoreCachedMessagesAtStartUpInSeconds: 2
-  relayControl: 1
 --- !u!114 &571344488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,7 +234,7 @@ MonoBehaviour:
   sendRate: 60
   offlineScene: 
   onlineScene: 
-  transport: {fileID: 571344487}
+  transport: {fileID: 571344489}
   networkAddress: localhost
   maxConnections: 100
   disconnectInactiveConnections: 0
@@ -275,6 +258,23 @@ MonoBehaviour:
   connectionQualityInterval: 3
   timeInterpolationGui: 0
 --- !u!114 &571344489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571344485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f2d307354f3ea49b3ea12e6763a9fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Channels: 0200000000000000
+  timeout: 25
+  maxFragments: 55
+  ignoreCachedMessagesAtStartUpInSeconds: 2
+  relayControl: 1
+--- !u!114 &571344490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
