@@ -1,4 +1,5 @@
 using Mirror;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,10 @@ using UnityEngine.InputSystem;
 
 public class Player : NetworkBehaviour
 {
+    public static Player LocalInstance { get; private set; }
+
+    public static event EventHandler OnAnyPlayerSpawned;
+
     [SerializeField] private float speed = 20.0f;
 
     private Rigidbody2D rb2d;
@@ -14,6 +19,15 @@ public class Player : NetworkBehaviour
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
+    }
+    public override void OnStartLocalPlayer()
+    {
+        if (isLocalPlayer)
+        {
+            LocalInstance = this;
+        }
+
+        OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
     }
 
     public void MoveCallback(InputAction.CallbackContext context)
