@@ -9,8 +9,9 @@ public class Player : NetworkBehaviour
 {
     public static Player LocalInstance { get; private set; }
 
-    public static event EventHandler OnAnyPlayerSpawned;
+    public static event EventHandler OnPlayerSpawned;
 
+    [SerializeField] private GameObject cameraHolder;
     [SerializeField] private float speed = 20.0f;
 
     private Rigidbody2D rb2d;
@@ -20,14 +21,12 @@ public class Player : NetworkBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
     }
-    public override void OnStartLocalPlayer()
+    public override void OnStartAuthority()
     {
-        if (isLocalPlayer)
-        {
-            LocalInstance = this;
-        }
+        LocalInstance = this;
+        cameraHolder.SetActive(true);
 
-        OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
+        OnPlayerSpawned?.Invoke(this, EventArgs.Empty);
     }
 
     public void MoveCallback(InputAction.CallbackContext context)
