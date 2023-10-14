@@ -11,6 +11,11 @@ public class PlayerController : MonoBehaviour
 	private float Sprint_Speed = 6.5f;
 	private bool Is_Sprinting = false;
 
+	[SerializeField]
+	private SpriteRenderer renderer;
+	[SerializeField]
+	private Animator animator;
+
 	void Start()
 	{
 		controller = GetComponent<CharacterController>();
@@ -43,6 +48,15 @@ public class PlayerController : MonoBehaviour
 
 		if (moveDirection.x != 0 || moveDirection.y != 0)
 		{
+			if (moveDirection.x > 0)
+			{
+				renderer.flipX = true;
+			}
+			else if (moveDirection.x < 0)
+			{
+				renderer.flipX = false;
+			}
+
 			if (Current_Speed < Max_Speed)
 			{
 				Current_Speed += 0.1f;
@@ -51,6 +65,7 @@ public class PlayerController : MonoBehaviour
 			{
 				Current_Speed = Max_Speed;
 			}
+			animator.SetBool("IsMoving", true);
 		}
 		else
 		{
@@ -58,6 +73,7 @@ public class PlayerController : MonoBehaviour
 			{
 				Current_Speed -= 0.1f;
 			}
+			animator.SetBool("IsMoving", false);
 		}
 
 
