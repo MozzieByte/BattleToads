@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1907601136442431244}
   - component: {fileID: 2062758636669636867}
   - component: {fileID: 5184499179219539277}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2649380900262644908}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 9169895504147474417}
   - component: {fileID: 1847563413661179756}
   - component: {fileID: 4274698685829205943}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerVisuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 67127912901228966}
   - component: {fileID: 8702967357032849627}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 199614666697212763}
   - component: {fileID: 211275745338540840}
   - component: {fileID: 7032887380246074450}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Frog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -487,19 +487,19 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 192
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1
-  m_Radius: 0.5
+  m_Height: 0.27
+  m_Radius: 0.16
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.09, z: 0}
 --- !u!114 &199614666697212763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,7 +578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4594984920762324472}
   - component: {fileID: 6643826530282636503}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}

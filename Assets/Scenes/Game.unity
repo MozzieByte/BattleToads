@@ -289,7 +289,8 @@ MonoBehaviour:
   playerPrefab: {fileID: 6428889442739339009, guid: 8526156e8d9be95499d6e552d01a6f3f, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 2982544253174361361, guid: 332bc435e73ca1742bd2738c849a5fb7, type: 3}
   snapshotSettings:
     bufferTimeMultiplier: 2
     bufferLimit: 32
@@ -5128,6 +5129,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee5c3a48ce737d34bb72a6ce8ae7e999, type: 3}
+--- !u!1001 &1041924693
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2982544253174361361, guid: 332bc435e73ca1742bd2738c849a5fb7, type: 3}
+      propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326303869368767383, guid: 332bc435e73ca1742bd2738c849a5fb7, type: 3}
+      propertyPath: sceneId
+      value: 362515580
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096818864360585533, guid: 332bc435e73ca1742bd2738c849a5fb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096818864360585533, guid: 332bc435e73ca1742bd2738c849a5fb7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096818864360585533, guid: 332bc435e73ca1742bd2738c849a5fb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096818864360585533, guid: 332bc435e73ca1742bd2738c849a5fb7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096818864360585533, guid: 332bc435e73ca1742bd2738c849a5fb7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096818864360585533, guid: 332bc435e73ca1742bd2738c849a5fb7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096818864360585533, guid: 332bc435e73ca1742bd2738c849a5fb7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096818864360585533, guid: 332bc435e73ca1742bd2738c849a5fb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096818864360585533, guid: 332bc435e73ca1742bd2738c849a5fb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096818864360585533, guid: 332bc435e73ca1742bd2738c849a5fb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 332bc435e73ca1742bd2738c849a5fb7, type: 3}
 --- !u!1 &1437476240
 GameObject:
   m_ObjectHideFlags: 0
@@ -5190,7 +5252,8 @@ MonoBehaviour:
   playerPrefab: {fileID: 6428889442739339009, guid: 8526156e8d9be95499d6e552d01a6f3f, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 2982544253174361361, guid: 332bc435e73ca1742bd2738c849a5fb7, type: 3}
   snapshotSettings:
     bufferTimeMultiplier: 2
     bufferLimit: 32
@@ -5368,6 +5431,7 @@ SceneRoots:
   - {fileID: 2065606559}
   - {fileID: 442935982}
   - {fileID: 676123864}
+  - {fileID: 1041924693}
   - {fileID: 621180446}
   - {fileID: 813969319}
   - {fileID: 1714576753}
