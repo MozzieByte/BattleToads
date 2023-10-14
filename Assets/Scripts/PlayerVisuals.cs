@@ -21,15 +21,26 @@ public class PlayerVisuals : NetworkBehaviour
 
         if (moveInput.x > 0)
         {
-            CmdFlipSprite(true);
+            FlipSprite(true);
         }
         else if (moveInput.x < 0)
         {
-            CmdFlipSprite(false);
+            FlipSprite(false);
         }
 
         bool isMoving = moveInput.magnitude > 0;
         animator.SetBool("IsMoving", isMoving);
+    }
+
+    [Client]
+    private void FlipSprite(bool state)
+    {
+        if (!isLocalPlayer)
+            return;
+
+        spriteRenderer.flipX = state;
+
+        CmdFlipSprite(state);
     }
 
 
@@ -38,13 +49,16 @@ public class PlayerVisuals : NetworkBehaviour
     [Command]
     private void CmdFlipSprite(bool state)
     {
+        spriteRenderer.flipX = state;
+
         RpcFlipSprite(state);
     }
 
     [ClientRpc]
     private void RpcFlipSprite(bool state)
     {
-        spriteRenderer.flipX = state;
+        if (!isLocalPlayer)
+            spriteRenderer.flipX = state;
     }
 
     #endregion
