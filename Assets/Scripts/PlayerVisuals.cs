@@ -12,12 +12,17 @@ public class PlayerVisuals : NetworkBehaviour
     [SerializeField]
     private Animator animator;
 
+    private Vector2 lastMoveDir = Vector2.zero;
+
     public void OnMove(InputAction.CallbackContext context)
     {
         if (!isOwned)
             return;
 
         Vector2 moveInput = context.ReadValue<Vector2>();
+
+        if (moveInput.x != 0 || moveInput.y != 0)
+            lastMoveDir = moveInput;
 
         if (moveInput.x > 0)
         {
@@ -30,6 +35,8 @@ public class PlayerVisuals : NetworkBehaviour
 
         bool isMoving = moveInput.magnitude > 0;
         animator.SetBool("IsMoving", isMoving);
+        animator.SetFloat("MovingX", lastMoveDir.x);
+        animator.SetFloat("MovingY", lastMoveDir.y);
     }
 
     [Client]
