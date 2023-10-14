@@ -802,6 +802,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Testing",
+            "id": "8e4de398-362b-40d4-a07a-57aa81e02a28",
+            "actions": [
+                {
+                    "name": "SpawnEnemy",
+                    "type": "Button",
+                    "id": "f171d8a9-e2d0-44a3-9f54-4d3772e87781",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c709ef4c-cd4b-44aa-94c9-e8cbdd5e5cf5",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpawnEnemy",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
