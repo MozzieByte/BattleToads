@@ -8,8 +8,8 @@ public class CameraTarget : MonoBehaviour
 
     private void Awake()
     {
-        Player.OnPlayerSpawned += delegate { 
-            if (Player.LocalInstance) 
+        PlayerController.OnPlayerSpawned += delegate { 
+            if (PlayerController.LocalInstance) 
                 localPlayerSpawned = true; 
         };
     }
@@ -26,7 +26,7 @@ public class CameraTarget : MonoBehaviour
             worldPosition = new Vector2(Mathf.Clamp(worldPosition.x, 0, horzExtent), Mathf.Clamp(worldPosition.y, 0, vertExtent));*/
 
             // 1/4th the distance from the player to the mouse position
-            Vector2 calculatedPosition = Vector2.Lerp(Player.LocalInstance.transform.position, worldPosition, 0.25f);
+            Vector2 calculatedPosition = Vector2.Lerp(PlayerController.LocalInstance.transform.position, worldPosition, 0.25f);
             transform.position = calculatedPosition;
         }
     }

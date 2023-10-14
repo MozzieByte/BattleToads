@@ -4725,6 +4725,7 @@ GameObject:
   - component: {fileID: 1287565765}
   - component: {fileID: 1287565764}
   - component: {fileID: 1287565768}
+  - component: {fileID: 1287565769}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4837,6 +4838,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 5944782400275995117}
+--- !u!114 &1287565769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287565763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &4898235856999309589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4845,6 +4880,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 211275745338540840, guid: 8526156e8d9be95499d6e552d01a6f3f, type: 3}
+      propertyPath: sceneId
+      value: 1711581154
+      objectReference: {fileID: 0}
     - target: {fileID: 1983663485543502477, guid: 8526156e8d9be95499d6e552d01a6f3f, type: 3}
       propertyPath: m_Height
       value: 0.12

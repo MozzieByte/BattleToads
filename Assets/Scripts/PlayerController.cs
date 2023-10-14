@@ -1,30 +1,44 @@
+using Mirror;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
-	private CharacterController controller;
+    public static PlayerController LocalInstance { get; private set; }
+
+    public static event EventHandler OnPlayerSpawned;
+
+    [SerializeField] private GameObject cameraHolder;
+
+    private CharacterController controller;
 	private Vector2 moveInput;
-	private float Current_Speed = 3.5f;
+
+    private float Current_Speed = 3.5f;
 	private float Max_Speed = 3.5f;
 	private float Base_Speed = 3.5f;
 	private float Sprint_Speed = 6.5f;
 	private bool Is_Sprinting = false;
 
-	[SerializeField]
-	private SpriteRenderer renderer;
-	[SerializeField]
-	private Animator animator;
+    public override void OnStartAuthority()
+    {
+        LocalInstance = this;
+        cameraHolder.SetActive(true);
 
-	void Start()
+        OnPlayerSpawned?.Invoke(this, EventArgs.Empty);
+    }
+
+    void Start()
 	{
 		controller = GetComponent<CharacterController>();
 	}
 
 	private void Update()
 	{
+        if (!isOwned)
+            return;
 
-		if (Is_Sprinting)
+        if (Is_Sprinting)
 			Max_Speed = Sprint_Speed;
 		else
 			Max_Speed = Base_Speed;
@@ -34,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
 	public void OnMove(InputAction.CallbackContext context)
 	{
-		moveInput = context.ReadValue<Vector2>();
+        moveInput = context.ReadValue<Vector2>();
 	}
 
 	public void OnSprint(InputAction.CallbackContext context)
@@ -44,19 +58,10 @@ public class PlayerController : MonoBehaviour
 
 	public void MovePlayer()
 	{
-		Vector3 moveDirection = new Vector3(moveInput.x, moveInput.y, 0);
+        Vector3 moveDirection = new Vector3(moveInput.x, moveInput.y, 0);
 
 		if (moveDirection.x != 0 || moveDirection.y != 0)
 		{
-			if (moveDirection.x > 0)
-			{
-				renderer.flipX = true;
-			}
-			else if (moveDirection.x < 0)
-			{
-				renderer.flipX = false;
-			}
-
 			if (Current_Speed < Max_Speed)
 			{
 				Current_Speed += 0.1f;
@@ -65,7 +70,6 @@ public class PlayerController : MonoBehaviour
 			{
 				Current_Speed = Max_Speed;
 			}
-			animator.SetBool("IsMoving", true);
 		}
 		else
 		{
@@ -73,7 +77,6 @@ public class PlayerController : MonoBehaviour
 			{
 				Current_Speed -= 0.1f;
 			}
-			animator.SetBool("IsMoving", false);
 		}
 
 

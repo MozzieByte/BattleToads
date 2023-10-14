@@ -1,20 +1,51 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerVisuals : MonoBehaviour
+public class PlayerVisuals : NetworkBehaviour
 {
-    [SerializeField] private PlayerLobbyData playerLobbyData;
-    [SerializeField] private TextMeshProUGUI usernameText;
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+    [SerializeField]
+    private Animator animator;
 
-    private void Start()
+    public void OnMove(InputAction.CallbackContext context)
     {
-        if (playerLobbyData == null)
-            return;
-        if (usernameText == null)
+        if (!isOwned)
             return;
 
-        usernameText.text = playerLobbyData.PlayerName;
+        Vector2 moveInput = context.ReadValue<Vector2>();
+
+        if (moveInput.x > 0)
+        {
+            CmdFlipSprite(true);
+        }
+        else if (moveInput.x < 0)
+        {
+            CmdFlipSprite(false);
+        }
+
+        bool isMoving = moveInput.magnitude > 0;
+        animator.SetBool("IsMoving", isMoving);
     }
+
+
+    #region NETCODE
+
+    [Command]
+    private void CmdFlipSprite(bool state)
+    {
+        RpcFlipSprite(state);
+    }
+
+    [ClientRpc]
+    private void RpcFlipSprite(bool state)
+    {
+        spriteRenderer.flipX = state;
+    }
+
+    #endregion
 }
