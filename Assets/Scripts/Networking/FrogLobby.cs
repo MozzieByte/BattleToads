@@ -6,14 +6,30 @@ using Mirror;
 
 public class FrogLobby : EOSLobby
 {
+    public static FrogLobby Instance { get; private set; }
+
+    public event System.EventHandler<PostFoundLobbySuccessEventArgs> PostFoundLobbySuccess;
+    public class PostFoundLobbySuccessEventArgs : System.EventArgs
+    {
+        public List<LobbyDetails> lobbies;
+    }
+
+    public List<AttributeData> lobbySettingsAttributes = new List<AttributeData>()
+    {
+        new AttributeData() { Key = "max_connections", Value = 4 }
+    };
+
     private string lobbyName = "My Lobby";
-    private string username = "Username";
     private bool showLobbyList = false;
     private bool showPlayerList = false;
 
     private List<LobbyDetails> foundLobbies = new List<LobbyDetails>();
     private List<Attribute> lobbyData = new List<Attribute>();
-    //private List<FrogNetworkManager.PlayerLobbyDataMessage> memberInfo = new List<FrogNetworkManager.PlayerLobbyDataMessage>();
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     //register events
     private void OnEnable()
@@ -23,35 +39,19 @@ public class FrogLobby : EOSLobby
         JoinLobbySucceeded += OnJoinLobbySuccess;
         FindLobbiesSucceeded += OnFindLobbiesSuccess;
         LeaveLobbySucceeded += OnLeaveLobbySuccess;
-        //base.LobbyMemberStatusUpdated += OnLobbyMemberStatusUpdate;
-    }
 
-/*    private void OnLobbyMemberStatusUpdate(LobbyMemberStatusReceivedCallbackInfo callback)
-    {
-        switch (callback.CurrentStatus)
+        if (!EOSSDKComponent.Initialized)
         {
-            case LobbyMemberStatus.Joined:
-
-                FrogNetworkManager.PlayerLobbyDataMessage characterMessage = new FrogNetworkManager.PlayerLobbyDataMessage
-                {
-                    ProductID = callback.TargetUserId,
-                    PlayerName = username
-                };
-
-                NetworkClient.Send(characterMessage);
-                memberInfo.Add(characterMessage);
-                break;
-            case LobbyMemberStatus.Promoted:
-                // Skip
-                break;
-            default:
-                // Every status besides promoted and joined suggests the member is no longer in the lobby
-                FrogNetworkManager.PlayerLobbyDataMessage disconnectedMember = memberInfo.Find(x => x.ProductID == callback.TargetUserId); ;
-                memberInfo.Remove(disconnectedMember);
-                break;
+            return;
         }
 
-    }*/
+        FindLobbies();
+    }
+
+    public void FindAllLobbies()
+    {
+        FindLobbies();
+    }
 
     //deregister events
     private void OnDisable()
@@ -71,13 +71,6 @@ public class FrogLobby : EOSLobby
         showLobbyList = false;
 
         GetComponent<NetworkManager>().StartHost();
-
-        FrogNetworkManager.PlayerLobbyDataMessage characterMessage = new FrogNetworkManager.PlayerLobbyDataMessage
-        {
-            PlayerName = username
-        };
-
-        NetworkClient.Send(characterMessage);
     }
 
     //when the user joined the lobby successfully, set network address and connect
@@ -89,23 +82,14 @@ public class FrogLobby : EOSLobby
 
         NetworkManager netManager = GetComponent<NetworkManager>();
         netManager.networkAddress = attributes.Find((x) => x.Data.Key == hostAddressKey).Data.Value.AsUtf8;
-
         netManager.StartClient();
-
-        FrogNetworkManager.PlayerLobbyDataMessage characterMessage = new FrogNetworkManager.PlayerLobbyDataMessage
-        {
-            PlayerName = username
-        };
-
-        NetworkClient.Send(characterMessage);
     }
 
     //callback for FindLobbiesSucceeded
     private void OnFindLobbiesSuccess(List<LobbyDetails> lobbiesFound)
     {
         foundLobbies = lobbiesFound;
-        showPlayerList = false;
-        showLobbyList = true;
+        PostFoundLobbySuccess?.Invoke(this, new PostFoundLobbySuccessEventArgs() { lobbies = foundLobbies });
     }
 
     //when the lobby was left successfully, stop the host/client
@@ -116,37 +100,10 @@ public class FrogLobby : EOSLobby
         netManager.StopClient();
     }
 
-    private void OnGUI()
+    public void CreateLobbyWithSettings()
     {
-        //if the component is not initialized then dont continue
-        if (!EOSSDKComponent.Initialized)
-        {
-            return;
-        }
-
-        //start UI
-        GUILayout.BeginHorizontal();
-
-        //draw side buttons
-        DrawMenuButtons();
-
-        //draw scroll view
-        GUILayout.BeginScrollView(Vector2.zero, GUILayout.MaxHeight(400));
-
-        //runs when we want to show the lobby list
-        if (showLobbyList && !showPlayerList)
-        {
-            DrawLobbyList();
-        }
-        //runs when we want to show the player list and we are connected to a lobby
-        else if (!showLobbyList && showPlayerList && ConnectedToLobby)
-        {
-            DrawLobbyMenu();
-        }
-
-        GUILayout.EndScrollView();
-
-        GUILayout.EndHorizontal();
+        uint maxConnections = (uint)lobbySettingsAttributes[0].Value.AsInt64;
+        CreateLobby(maxConnections, LobbyPermissionLevel.Publicadvertised, false, lobbySettingsAttributes.ToArray());
     }
 
     private void DrawMenuButtons()
@@ -165,11 +122,10 @@ public class FrogLobby : EOSLobby
         //create lobby button
         if (GUILayout.Button("Create Lobby"))
         {
-            CreateLobby(4, LobbyPermissionLevel.Publicadvertised, false, new AttributeData[] { new AttributeData { Key = AttributeKeys[0], Value = lobbyName } });
+            CreateLobby(4, LobbyPermissionLevel.Publicadvertised, false, new AttributeData[] { new AttributeData { Key = AttributeKeys[0], Value = lobbyName }, });
         }
 
         lobbyName = GUILayout.TextField(lobbyName, 40, GUILayout.Width(200));
-        username = GUILayout.TextField(username, 40, GUILayout.Width(200));
 
         GUILayout.EndHorizontal();
 
